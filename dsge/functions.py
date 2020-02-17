@@ -1,4 +1,6 @@
 import math
+import numpy as np
+from scipy.optimize import minimize_scalar
 
 
 def ces_utility(sigma):
@@ -23,6 +25,12 @@ def ces_utility(sigma):
     return util
 
 
+def cobb_douglas1(alpha):
+    def f(s, c):
+        return s**alpha - c
+    return f
+
+
 def derivative(function, location=None, argument=0, precision=0.000001):
     d_x = precision
     if location is None:
@@ -32,3 +40,11 @@ def derivative(function, location=None, argument=0, precision=0.000001):
         return deriv
     d_y = function(location + d_x) - function(location)
     return d_y / d_x
+
+
+def maximize(g, a, b, args):
+    objective = lambda x: -g(x, *args)
+    result = minimize_scalar(objective, bounds=(a, b), method='bounded')
+    maximizer, maximum = result.x, -result.fun
+    return maximizer, maximum
+
