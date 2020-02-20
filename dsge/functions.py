@@ -1,5 +1,4 @@
 import math
-import numpy as np
 from scipy.optimize import minimize_scalar
 
 
@@ -43,8 +42,9 @@ def derivative(function, location=None, argument=0, precision=0.000001):
 
 
 def maximize(g, a, b, args):
-    objective = lambda x: -g(x, *args)
+    def objective(x):
+        return -g(x, *args)
+
     result = minimize_scalar(objective, bounds=(a, b), method='bounded')
     maximizer, maximum = result.x, -result.fun
     return maximizer, maximum
-

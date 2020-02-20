@@ -1,7 +1,5 @@
 import numpy as np
 import matplotlib.pyplot as plt
-from scipy.interpolate import interp1d
-from scipy.optimize import minimize_scalar
 from interpolation import interp
 
 from dsge.functions import maximize
@@ -19,7 +17,8 @@ class Opt_Problem:
 
         u, f, β = self.u, self.f, self.β
 
-        v = lambda x: interp(self.grid, v_array, x)
+        def v(x):
+            interp(self.grid, v_array, x)
 
         return u(c) + β * v(f(s, c))
 
@@ -52,4 +51,3 @@ class Opt_Problem:
         ax.legend()
         ax.set(ylim=(0, 1.5), xlim=(np.min(self.grid), np.max(self.grid)))
         plt.show()
-

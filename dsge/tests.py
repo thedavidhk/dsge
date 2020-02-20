@@ -1,8 +1,5 @@
 from dsge.agents import Household
 from dsge.functions import ces_utility
-from dsge.functions import cobb_douglas1
-from dsge.functions import maximize
-import math
 import numpy as np
 
 
@@ -30,6 +27,6 @@ def bellman_test():
     h1._opt.vfi(v_0, n=4)
 
 
-#household_test()
-#import pdb; pdb.set_trace()
+# household_test()
+# import pdb; pdb.set_trace()
 bellman_test()
